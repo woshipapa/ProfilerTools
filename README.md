@@ -65,7 +65,7 @@ with ProfilerWrapper(
 | `log_dir`                          | 日志/汇总输出目录                           | profiler 汇总/表格          |
 | `mem_dir`                          | 内存快照输出目录                            | pickle/memory 诊断        |
 | `enabled_record_memory_pickle`     | 使用pytorch的snapshot功能保存显存变化pickle图                        | 完整的一段显存可视化分析                  |
-| `enabled_record_cuda_average_time` | 绘制 CUDA 自耗时折线图                      | 关注每层及 FlashAttention 性能 |
+| `enabled_record_cuda_average_time` | 支持自定义的从每层的profiler得到的kernel或者record的name中，自己做数据的处理得到一个时间                      | 统计每层具体kernel的时间，可以可视化 |
 | `enable_record_cuda_mm`            | 采集每一层的allocated,reserved memory，最终绘图                          | 多层显存分析，主要用于判断每层激活值显存的增加                |
 | `enable_print_summary`             | 保存/打印 profiler 表格                   | 查找慢算子                   |
 
