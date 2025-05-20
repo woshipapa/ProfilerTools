@@ -105,10 +105,79 @@ with ProfilerWrapper(
 
 ---
 
-## License
 
-MIT（如无特别声明）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ⏱ `global_timer` 使用说明
+
+`MyTimer` 是一个分布式多进程环境下的通用时间记录工具，用于 **精确测量并记录各个阶段的运行时间（支持 CPU 和 CUDA）**，并将每个 rank 的日志分别写入文件，后续可以通过正则匹配与 DataFrame 分析构建多进程时间轴（timeline）可视化。
 
 ---
 
-如需英文版、详细参数表格或特殊集成案例，请随时联系。
+## ✅ 功能概述
+
+- ✅ 支持 CPU + CUDA 计时（`time.time()` + `torch.cuda.Event`）
+- ✅ 支持多个命名阶段（`forward`、`backward` 等）
+- ✅ 支持多进程 rank 自动识别和独立输出日志
+- ✅ 自动创建日志目录和文件，避免冲突
+- ✅ 日志可用于 timeline 可视化、straggler 分析
+
+---
+
+## 🧱 使用方式
+
+```python
+from utils import global_timer
+
+# 开始记录某阶段
+global_timer.start("forward")
+
+# 模块逻辑
+...
+
+# 停止记录该阶段
+global_timer.stop("forward")
+
+# 最后导出所有记录
+global_timer.dump()
+
+
+📝 日志输出格式
+每个 rank 会生成一个 .log 文件，内容如下：
+
+sql
+复制
+编辑
+[RANK 0] forward, start=1716182684.282194, end=1716182685.123003, cpu_dur=0.840809s, cuda_dur=830.512ms
+📁 输出文件结构示例
+lua
+复制
+编辑
+time_log/
+├── timer_rank0.log
+├── timer_rank1.log
+└── ...
