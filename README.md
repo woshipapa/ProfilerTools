@@ -1,6 +1,11 @@
 # ProfilerTools
 used to profile cuda memory and time in distributed training
-# ProfilerWrapper
+
+本项目包含两个核心性能分析组件：
+
+- [🔍 ProfilerWrapper](#-profilerwrapper-transformer-性能分析工具)
+- [⏱ global_timer](#-global_timer-分布式时间记录工具)
+## 🔍 ProfilerWrapper: Transformer 性能分析工具
 
 `ProfilerWrapper` 是专为 Transformer 结构的 PyTorch 深度学习模型开发的性能分析与统计工具。它可以自动追踪和汇总 Transformer 各层（如 attention/block/FFN）的 CUDA 计算耗时、显存使用、Flash Attention 执行情况等关键性能指标，帮助你精准发现瓶颈与优化方向。
 
