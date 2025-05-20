@@ -137,7 +137,7 @@ with ProfilerWrapper(
 
 
 
-## ⏱ `global_timer` 使用说明
+## ⏱ global_timer: 分布式时间记录工具
 
 `MyTimer` 是一个分布式多进程环境下的通用时间记录工具，用于 **精确测量并记录各个阶段的运行时间（支持 CPU 和 CUDA）**，并将每个 rank 的日志分别写入文件，后续可以通过正则匹配与 DataFrame 分析构建多进程时间轴（timeline）可视化。
 
